@@ -1,0 +1,191 @@
+[data-bs-theme=dark]
+{
+    --theme-icon: "\f46b";
+}
+
+[data-bs-theme=light]
+{
+    --theme-icon: "\f468";
+    --bs-tertiary-bg-rgb: 240, 243, 245;
+}
+
+body
+{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+footer
+{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.hidden
+{
+    opacity: 0!important;
+    visibility: collapse;
+    display: none;
+}
+
+.disabled
+{
+    pointer-events: none;
+}
+
+.overlay
+{
+    position: absolute;
+    background-color: rgba(0, 0, 0, .3);
+    height: 100vh;
+    width: 100vw;
+    z-index: 1001;
+}
+
+.overlay-dark
+{
+    background-color: rgba(0, 0, 0, .8);;
+}
+
+.btn-settings.show
+{
+    background-color: var(--bs-secondary-bg);
+}
+
+.btn-settings.dropdown-toggle::after
+{
+    content: none;
+}
+
+.btn-settings:hover
+{
+    background-color: var(--bs-secondary-bg);
+}
+
+.settings-menu
+{
+    min-width: 3.5rem;
+    transform: translate(-14px, 40px) !important;
+}
+
+#btn-theme
+{
+    width: 100%;
+}
+
+.theme-icon::before
+{
+    content: var(--theme-icon);
+}
+
+.locale-menu
+{
+    overflow-y: auto;
+    max-height: 25rem;
+    transform: translate(0px, 50px) !important;
+}
+
+.file-drop
+{
+    border: 3px dashed rgba(0, 0, 0, .5);
+    min-height: 150px;
+}
+
+.btn-new, .dropdown-import
+{
+    margin: auto;
+    width: 80%;
+}
+
+.import-menu
+{
+    transform: translate(0px, 30px) !important;
+}
+
+img.logo
+{
+    max-height: 1.5rem;
+}
+
+.editor > main
+{
+    height: 100%;
+    max-height: 100vh;
+}
+
+.card-img-box
+{
+    display: grid;
+}
+
+.card-img-box:hover > img
+{
+    opacity: .3;
+}
+
+.card-img-box > *
+{
+    transition: opacity .5s ease;
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+
+.card-img-box > .file-drop
+{
+    cursor: pointer;
+}
+
+.card-img-preview
+{
+    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
+    pointer-events: none;
+}
+
+.card-inputs-container
+{
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.card-inputs-container::-webkit-scrollbar
+{
+    width: 10px;
+}
+
+.card-inputs-container::-webkit-scrollbar-thumb
+{
+    background: rgba(108, 117, 125, .8);
+    border-radius: 5px;
+}
+
+.card-inputs-container::-webkit-scrollbar-thumb:hover
+{
+    background: rgba(108, 117, 125, .7);
+}
+
+.btn-advanced-add::before, .btn-meta-add::before
+{
+    content: '+ ';
+}
+
+.btn-advanced-remove::before, .btn-meta-remove::before
+{
+    content: '- ';
+}
+
+div#save-info-display
+{
+    transition: opacity .5s ease;
+    display: block!important;
+    visibility: visible!important;
+    pointer-events: none;
+}
+
+div#save-info-display.hidden
+{
+    transition: opacity 5s ease;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/translations.js"></script>
+    <script src="scripts/storagehandler.js"></script>
+    <script src="scripts/preload.js"></script>
+    <script>editorLoading();</script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="styles/animations.css" rel="stylesheet">
+    <link href="styles/flags.css" rel="stylesheet">
+    <link href="styles/sized.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+    <title>Editor</title>
+</head>
+<body class="d-flex d-column editor">
+    <div class="overlay overlay-dark d-flex flex-column justify-content-center align-items-center hidden">
+        <img src="assets/spinner.png" alt="loading..."/>
+    </div>
+    <main class="d-flex flex-md-row flex-column justify-content-center align-items-center m-auto mt-md-auto mt-0 col-12">
+        <div class="dropdown position-absolute top-0 end-0 m-md-3 m-2">
+            <button class="btn btn-settings rounded border-secondary dropdown-toggle" type="button" id="btn-settings" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                <i class="bi bi-gear"></i>
+            </button>
+            <ul class="settings-menu dropdown-menu" aria-labelledby="btn-settings">
+                <li>
+                    <button class="btn btn-settings rounded-0" id="btn-theme">
+                        <i class="bi theme-icon"></i>
+                    </button>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-locale rounded-0 dropdown-toggle" type="button" id="btn-locale" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <img class="en-US" alt="">
+                        </button>
+                        <ul class="locale-menu dropdown-menu" aria-labelledby="btn-locale">
+                            <li>
+                                <button class="btn btn-locale rounded-0 d-flex flex-row" data-locale="en-US">
+                                    <p class="flex-fill text-start">English (US)</p>
+                                    <img class="en-US" alt="en-US">
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn btn-locale rounded-0 d-flex flex-row" data-locale="nl-NL">
+                                    <p class="flex-fill text-start">Nederlands</p>
+                                    <img class="nl-NL" alt="nl-NL">
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="container d-flex flex-column col-md-3 col-10 p-2 pb-0 mb-md-0 mb-3">
+            <div class="card-img-box bg-body-tertiary rounded p-2">
+                <div class="file-drop rounded d-flex flex-column justify-content-center align-items-center m-2" id="file-drop">
+                    <input type="file" id="file-box" accept="image/png" class="hidden collapse">
+                    <p class="m-0" data-i18n="change-image"></p>
+                </div>
+                <img class="card-img-preview rounded">
+            </div>
+        </div>
+        <div class="card-inputs-container container d-flex flex-column col-md-7 col-10 bg-body-tertiary rounded p-2">
+            <div class="section-basic">
+                <h2 data-i18n="section.basic.title"></h2>
+                <p data-i18n="section.basic.description"></p>
+                <div class="input-name-box mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" for="card-input-name" data-i18n="card-name-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-name" data-i18n="undo"></button>
+                    </div>
+                    <input class="form-control" type="text" name="card-input-name" id="card-input-name" data-property="Name" data-i18n-placeholder="card-name-placeholder">
+                </div>
+                <div class="input-description-box mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" for="card-input-description" data-i18n="card-description-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-description" data-i18n="undo"></button>
+                    </div>
+                    <textarea class="form-control" name="card-input-description" id="card-input-description" data-property="Description" data-i18n-placeholder="card-description-placeholder"></textarea>
+                </div>
+                <div class="input-personality-box mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" for="card-input-personality" data-i18n="card-personality-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-personality" data-i18n="undo"></button>
+                    </div>
+                    <textarea class="form-control" name="card-input-personality" id="card-input-personality" data-property="Personality" data-i18n-placeholder="card-personality-placeholder"></textarea>
+                </div>
+                <div class="input-scenario-box mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" for="card-input-scenario" data-i18n="card-scenario-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-scenario" data-i18n="undo"></button>
+                    </div>
+                    <textarea class="form-control" name="card-input-scenario" id="card-input-scenario" data-property="Scenario" data-i18n-placeholder="card-scenario-placeholder"></textarea>
+                </div>
+                <div class="input-first_message-box mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" for="card-input-first_message" data-i18n="card-first_message-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-first_message" data-i18n="undo"></button>
+                    </div>
+                    <textarea class="form-control" name="card-input-first_message" id="card-input-first_message" data-property="FirstMessage" data-i18n="card-first_message-placeholder"></textarea>
+                </div>
+            </div>
+            <div class="section-advanced mt-4">
+                <h2 data-i18n="section.advanced.title"></h2>
+                <p data-i18n="section.advanced.description"></p>
+                <div class="input-alt_greetings-box mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" data-i18n="card-alt_greetings-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="alt_greetings-container" data-i18n="undo"></button>
+                    </div>
+                    <div id="alt_greetings-container" class="mb-2 collapsed"></div>
+                    <button class="btn btn-outline-secondary btn-advanced-add w-100" id="btn-add-alt_greeting" type="button" data-i18n="btn.add-alt_greeting"></button>
+                </div>
+                <div class="input-mes_example mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" for="card-input-mes_example" data-i18n="card-mes_example-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-mes_example" data-i18n="undo"></button>
+                    </div>
+                    <textarea class="form-control" name="card-input-mes_example" id="card-input-mes_example" data-property="MessageExamples" data-i18n="card-mes_example-placeholder"></textarea>
+                    <button class="btn btn-outline-secondary btn-advanced-add w-100 mt-2" id="btn-add-mes_example" type="button" data-i18n="btn.add-mes_example"></button>
+                </div>
+            </div>
+            <div class="section-meta mt-4">
+                <h2 data-i18n="section.meta.title"></h2>
+                <p data-i18n="section.meta.description"></p>
+                <div class="d-flex flex-row justify-content-between mt-3">
+                    <div class="input-creator_name-box col-5">
+                        <div class="d-flex flex-row">
+                            <label class="form-label flex-fill" for="card-input-creator_name" data-i18n="card-creator_name-label"></label>
+                            <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-creator_name" data-i18n="undo"></button>
+                        </div>
+                        <input class="form-control" type="text" name="card-input-creator_name" id="card-input-creator_name" data-property="CreatorName" data-i18n-placeholder="card-creator_name-placeholder">
+                    </div>
+                    <div class="input-card_version-box col-5">
+                        <div class="d-flex flex-row">
+                            <label class="form-label flex-fill" for="card-input-card_meta_version" data-i18n="card-card_meta_version-label"></label>
+                            <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-card_meta_version" data-i18n="undo"></button>
+                        </div>
+                        <input class="form-control" type="text" name="card-input-card_meta_version" id="card-input-card_meta_version" data-property="CharacterVersion" data-i18n-placeholder="card-card_meta_version-placeholder">
+                    </div>
+                </div>
+                <div class="input-card-creator_notes-box mt-3">
+                    <div class="d-flex flex-row">
+                        <label class="form-label flex-fill" for="card-input-creator_notes" data-i18n="card-creator_notes-label"></label>
+                        <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-target="card-input-creator_notes" data-i18n="undo"></button>
+                    </div>
+                    <textarea class="form-control" name="card-input-creator_notes" id="card-input-creator_notes" data-property="CreatorNotes" data-i18n-placeholder="card-creator_notes-placeholder"></textarea>
+                </div>
+                <div class="d-flex flex-row justify-content-between mt-3">
+                    <div class="input-card-last_updated-box d-flex flex-column">
+                        <div class="d-flex flex-row">
+                            <label class="form-label me-1" data-i18n="card-updated-label"></label>
+                            <label class="form-label hidden" id="updated-label"></label>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <button class="btn btn-outline-secondary btn-meta-add me-3" id="btn-add-updated" type="button" data-i18n="btn.add-updated"></button>
+                            <button class="btn btn-outline-danger btn-meta-remove hidden" id="btn-remove-updated" type="button" data-i18n="btn.remove-updated"></button>
+                        </div>
+                    </div>
+                    <div class="card-created-box d-flex flex-row">
+                        <label class="form-label me-1" data-i18n="card-created-label"></label>
+                        <label class="form-label" id="created-label"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="section-export mt-4">
+                <h2 data-i18n="section.export.title"></h2>
+                <p data-i18n="section.export.description"></p>
+                <div class="d-flex flex-md-row flex-column justify-content-around">
+                    <button class="btn btn-outline-secondary btn-export mb-md-0 mb-3 image" type="button" data-export="png" data-i18n="btn.export-image"></button>
+                    <button class="btn btn-outline-secondary btn-export json" type="button" data-export="json" data-i18n="btn.export-json"></button>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute bottom-0 end-0 m-md-3 m-2 hidden" id="save-info-display">
+            <p class="m-0" data-i18n="saved"></p>
+        </div>
+    </main>
+    <footer class="text-center">
+        &copy; Bit Friend Studios 2024 | Version 1.0.0
+    </footer>
+    <template id="alt_greeting-template">
+        <div class="input-alt_greeting-box mb-3">
+            <div class="d-flex flex-row">
+                <label class="form-label flex-fill" data-i18n="card-alt_greeting-label"></label>
+                <button class="btn btn-undo-changes border-0 p-0 hidden" type="button" data-i18n="undo"></button>
+            </div>
+            <textarea class="form-control textarea" name="card-input-alt_greeting" data-property="AltGreetings" data-i18n-placeholder="card-alt_greeting-placeholder"></textarea>
+            <button class="btn btn-outline-danger btn-advanced-remove w-100 mt-2" type="button" data-i18n="btn.remove-alt_greeting"></button>
+        </div>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/crc-32@1.2.2"></script>
+    <script src="scripts/serializer.js"></script>
+    <script src="scripts/objects.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="scripts/editor.js"></script>
+    <script>pageLoad();</script>
+</body>
+</html>

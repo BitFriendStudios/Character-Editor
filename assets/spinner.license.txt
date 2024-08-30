@@ -1,0 +1,7 @@
+The loading spinner gif and the pulsar gif were generated using https://loading.io/ and are used under the Free License (https://loading.io/license/).
+
+Thanks to the people at loading.io for the service they provide.
+
+Links to the images used are:
+https://loading.io/asset/753995 - Spinner
+https://loading.io/asset/753990 - Pulsar

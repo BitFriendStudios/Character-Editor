@@ -1,0 +1,32 @@
+#btn-locale > img
+{
+    margin-left: -5px;
+    max-height: 1rem;
+}
+
+.btn-locale
+{
+    width: 100%;
+    max-height: 2.5rem;
+}
+
+.btn-locale > img
+{
+    margin-left: 5px;
+    max-height: 1.5rem;
+}
+
+.btn-locale:hover
+{
+    background-color: var(--bs-secondary-bg);
+}
+
+img.en-US
+{
+    content: url(../assets/flags/en-US.svg);
+}
+
+img.nl-NL
+{
+    content: url(../assets/flags/nl-NL.svg);
+}

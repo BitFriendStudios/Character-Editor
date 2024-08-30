@@ -1,0 +1,4 @@
+These icons are provided and created by : https://flagicons.lipis.dev/
+A selection of the available flags is used based of available locales.
+
+For full usage rights, please see the license at: https://github.com/lipis/flag-icons
