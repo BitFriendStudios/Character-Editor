@@ -1,5 +1,6 @@
 async function pageLoading()
 {
+    await StorageHandler.validateDatabase();
     var selectedTheme = StorageHandler.getLocal('env.theme', false);
     if (selectedTheme)
         document.documentElement.setAttribute('data-bs-theme', selectedTheme);

@@ -108,6 +108,11 @@ class StorageHandler
         });
     }
 
+    static async validateDatabase()
+    {
+        return await this.#openDBInstance();
+    }
+
     static async #openDBInstance()
     {
         return new Promise((resolve, reject) =>

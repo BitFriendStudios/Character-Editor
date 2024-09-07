@@ -4,7 +4,7 @@ async function loadTranslationsForLocale(localeKey)
 {
     try
     {
-        var data = await fetch(`../i18n/${localeKey}.json`);
+        var data = await fetch(`https://raw.githubusercontent.com/BitFriendStudios/Character-Editor/main/i18n/${localeKey}.json`);
         var body = await data.json();
         if (!data.ok)
             throw Error(body);
@@ -14,7 +14,7 @@ async function loadTranslationsForLocale(localeKey)
     {
         console.error(`Couldn't load translations for locale ${localeKey}`);
         console.error(e);
-        var data = await fetch(`../i18n/${localeKey}.json`);
+        var data = await fetch(`https://raw.githubusercontent.com/BitFriendStudios/Character-Editor/main/i18n/${localeKey}.json`);
         var body = await data.json();
         if (!data.ok)
             throw Error(body);

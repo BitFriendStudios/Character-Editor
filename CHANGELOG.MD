@@ -1,3 +1,11 @@
+## 1.0.1
+This version pushes some bug fixes encountered when testing on the online (github pages) environment.
+
+### Fixed
+* Removed reference to non-existing css file
+* Changed translation source for github pages
+* Add extra check to make sure database exists and is ready to be used
+
 ## 1.0.0
 ### Initial Release
 This version marks the initial public release of Bit Friend's character card editor.
